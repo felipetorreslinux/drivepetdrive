@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -16,6 +17,7 @@
         android:layout_alignParentLeft="true">
 
         <ImageView
+            android:id="@+id/imageview_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_apps"
@@ -28,12 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/switch_conexao"
-            android:layout_marginRight="16dp"
-            android:textSize="16dp"
+            android:layout_toEndOf="@id/imageview_menu"
+            android:layout_marginLeft="16dp"
             android:text="Offline"
             android:textColor="@android:color/white"
-            android:layout_toLeftOf="@+id/switch_conexao" />
+            android:textSize="22dp"
+            android:layout_toRightOf="@id/imageview_menu" />
 
         <Switch
             android:id="@+id/switch_conexao"
