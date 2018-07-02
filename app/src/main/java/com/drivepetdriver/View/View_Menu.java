@@ -65,33 +65,20 @@ public class View_Menu extends Activity implements View.OnClickListener {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b == true){
                     ONLINE_USER = true;
-                    action_bar_menu.setBackgroundColor(getResources().getColor(R.color.colorBgSplash));
-                    bottom_bar_menu.setBackgroundColor(getResources().getColor(R.color.colorBgSplash));
-                    window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(),R.color.colorBgSplash));
-                    textview_conexao.setText("Conectando...");
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            getFragmentManager().beginTransaction().replace(R.id.container_central,
-                                    new Inicio_Fragment()).commit();
-                            textview_conexao.setText("Online");
-                        }
-                    }, 1500);
+                    textview_conexao.setText("Online");
+                    item_tab_menu_inicio.setAlpha((float) 1.0);
+                    item_tab_menu_ganhos.setAlpha((float) 0.5);
+                    item_tab_menu_aval.setAlpha((float) 0.5);
+                    item_tab_menu_conta.setAlpha((float) 0.5);
+                    getFragmentManager().beginTransaction().replace(R.id.container_central,
+                            new Inicio_Fragment()).commit();
+                    TAB_INDEX = 0;
                 }else{
                     ONLINE_USER = false;
                     textview_conexao.setText("Offline");
-                    action_bar_menu.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    bottom_bar_menu.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAccent));
-                    textview_conexao.setText("Saindo...");
-                    textview_conexao.setText("Offline");
                     if(TAB_INDEX == 0){
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.container_central)).commit();
-                            }
-                        }, 1500);
+                        getFragmentManager().beginTransaction().remove(getFragmentManager()
+                                .findFragmentById(R.id.container_central)).commit();
                     }
                 }
             }
@@ -113,16 +100,12 @@ public class View_Menu extends Activity implements View.OnClickListener {
 
     };
 
-
     public void novaSolicitacao(){
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_new_solicitacao, null);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.setCancelable(true);
         bottomSheetDialog.show();
-        Vibrate.playVibrate(this);
-        Sounds.playSoundAlertCar(this);
-
     };
 
     @Override
@@ -137,10 +120,12 @@ public class View_Menu extends Activity implements View.OnClickListener {
                     if(ONLINE_USER == true){
                         getFragmentManager().beginTransaction().replace(R.id.container_central,
                                 new Inicio_Fragment()).commit();
+                        TAB_INDEX = 0;
                     }else{
-                        getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.container_central)).commit();
+                        getFragmentManager().beginTransaction().remove(getFragmentManager()
+                                .findFragmentById(R.id.container_central)).commit();
+                        TAB_INDEX = 0;
                     }
-                    TAB_INDEX = 0;
                 }
                 break;
 
@@ -158,7 +143,6 @@ public class View_Menu extends Activity implements View.OnClickListener {
                 item_tab_menu_aval.setAlpha((float) 1.0);
                 item_tab_menu_conta.setAlpha((float) 0.5);
                 TAB_INDEX = 2;
-                novaSolicitacao();
                 break;
 
             case R.id.item_tab_menu_conta:
